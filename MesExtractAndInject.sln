@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.24627.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MesExtractAndInject", "MesExtractAndInject\MesExtractAndInject.csproj", "{7C395A5A-2120-4577-89EB-AB8A4E36E005}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MseExtractAndInject.Core", "MseExtractAndInject.Core\MseExtractAndInject.Core.csproj", "{0E4E908C-FB11-4B90-8AB8-24B916054F96}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MesExtractAndInject.Wpf", "MesExtractAndInject.Wpf\MesExtractAndInject.Wpf.csproj", "{A5F5AD02-FFBF-4A85-87A9-245B0D6A3AC8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7C395A5A-2120-4577-89EB-AB8A4E36E005}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7C395A5A-2120-4577-89EB-AB8A4E36E005}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7C395A5A-2120-4577-89EB-AB8A4E36E005}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7C395A5A-2120-4577-89EB-AB8A4E36E005}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0E4E908C-FB11-4B90-8AB8-24B916054F96}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0E4E908C-FB11-4B90-8AB8-24B916054F96}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0E4E908C-FB11-4B90-8AB8-24B916054F96}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0E4E908C-FB11-4B90-8AB8-24B916054F96}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A5F5AD02-FFBF-4A85-87A9-245B0D6A3AC8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A5F5AD02-FFBF-4A85-87A9-245B0D6A3AC8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A5F5AD02-FFBF-4A85-87A9-245B0D6A3AC8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A5F5AD02-FFBF-4A85-87A9-245B0D6A3AC8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
