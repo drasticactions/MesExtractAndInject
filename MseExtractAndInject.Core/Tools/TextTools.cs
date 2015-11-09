@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using MseExtractAndInject.Core.Models;
 
@@ -13,6 +14,20 @@ namespace MseExtractAndInject.Core.Tools
             var startByte = file.Slice(0, startIndex);
             var endByte = file.Slice(endIndex, file.Length - 1);
             return Combine(startByte, replaceText, endByte);
+        }
+
+        public static string FullWidthConvertor(string unicodeString)
+        {
+            var sb = new StringBuilder(256);
+            LCMapString(LOCALE_SYSTEM_DEFAULT, LCMAP_FULLWIDTH, unicodeString, -1, sb, sb.Capacity);
+            return sb.ToString();
+        }
+
+        public static string HalfWidthConvertor(string unicodeString)
+        {
+            var sb = new StringBuilder(256);
+            LCMapString(LOCALE_SYSTEM_DEFAULT, LCMAP_HALFWIDTH, unicodeString, -1, sb, sb.Capacity);
+            return sb.ToString();
         }
 
         public static string DecodeText(byte[] file)
@@ -152,12 +167,19 @@ namespace MseExtractAndInject.Core.Tools
                 var endIndex = Array.IndexOf(file, Convert.ToByte('\x26'), dialogIndex);
                 var dialogBytes = file.Slice(dialogIndex, endIndex);
                 dialog.DialogBytes = dialogBytes;
-                dialog.StartIndex = dialogIndex; // The start of the actual dialog.
+                dialog.StartIndex = dialogIndex + 2; // The start of the actual dialog.
                 dialog.EndIndex = endIndex;
                 dialog.Dialog = TextTools.DecodeText(dialogBytes);
                 dialogList.Add(dialog);
             }
             return dialogList;
         }
+
+        [DllImport("kernel32.dll", CharSet = CharSet.Unicode)]
+        public static extern int LCMapString(uint Locale, uint dwMapFlags, string lpSrcStr, int cchSrc, StringBuilder lpDestStr, int cchDest);
+
+        private const uint LCMAP_FULLWIDTH = 0x00800000;
+        private const uint LOCALE_SYSTEM_DEFAULT = 0x0800;
+        private const uint LCMAP_HALFWIDTH = 0x00400000;
     }
 }
