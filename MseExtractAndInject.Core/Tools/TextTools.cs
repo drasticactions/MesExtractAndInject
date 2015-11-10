@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Net.Http;
 using System.Runtime.InteropServices;
 using System.Text;
 using MseExtractAndInject.Core.Models;
@@ -40,68 +41,70 @@ namespace MseExtractAndInject.Core.Tools
             var control = false;
             var skip = false;
             var byteList = new List<byte>();
-            foreach (var testByte in file)
+            for (int index = 0; index < file.Length; index++)
             {
+                var testByte = file[index];
+                var testCharByte = new Byte();
+                if (index != file.Length - 1)
+                {
+                    testCharByte = file[index + 1];
+                }
                 if (testByte == '\xBA' && !skip) // control byte
                 {
                     control = true;
                 }
-                else if (control && testByte == '\x22')  // dialog start someone else?
+                else if (control && testByte == '\x23') // dialog start cole
                 {
                     control = false;
                 }
-                else if (control && testByte == '\x23')  // dialog start cole
+                else if (control && testByte == '\x24') // dialog start doc
                 {
                     control = false;
                 }
-                else if (control && testByte == '\x24')  // dialog start doc
+                else if (control && testByte == '\x25') // dialog start jack
                 {
                     control = false;
                 }
-                else if (control && testByte == '\x25')  // dialog start jack?
+                else if (control && testByte == '\x26') // dialog end
                 {
                     control = false;
                 }
-                else if (control && testByte == '\x26')  // dialog end
-                {
-                    control = false;
-                }
-                else if (control && testByte == '\x28')  // symbol byte
+                else if (control && testByte == '\x28') // symbol byte
                 {
                     control = false;
                     sym = true;
                 }
-                else if (sym && testByte == '\x0D')  // comma
+                else if (sym && testByte == '\x0D') // comma
                 {
-                    byteList.AddRange(new[] { Convert.ToByte('\x81'), Convert.ToByte('\x41') });
+                    byteList.AddRange(new[] {Convert.ToByte('\x81'), Convert.ToByte('\x41')});
                     sym = false;
                 }
-                else if (sym && testByte == '\x0E')  // ..
+                else if (sym && testByte == '\x0E') // ..
                 {
-                    byteList.AddRange(new[] { Convert.ToByte('\x81'), Convert.ToByte('\x64') });
+                    byteList.AddRange(new[] {Convert.ToByte('\x81'), Convert.ToByte('\x64')});
                     sym = false;
                 }
-                else if (sym && testByte == '\x0F')  // period
+                else if (sym && testByte == '\x0F') // period
                 {
-                    byteList.AddRange(new[] { Convert.ToByte('\x81'), Convert.ToByte('\x42') });
+                    byteList.AddRange(new[] {Convert.ToByte('\x81'), Convert.ToByte('\x42')});
                     sym = false;
                 }
-                else if (sym && testByte == '\x10')  // space
+                else if (sym && testByte == '\x10') // space
                 {
-                    byteList.AddRange(new[] { Convert.ToByte('\x81'), Convert.ToByte('\x40') });
+                    byteList.AddRange(new[] {Convert.ToByte('\x81'), Convert.ToByte('\x40')});
                     sym = false;
                 }
-                else if (sym && testByte == '\x11')  // !
+                else if (sym && testByte == '\x11') // !
                 {
-                    byteList.AddRange(new[] { Convert.ToByte('\x81'), Convert.ToByte('\x49') });
+                    byteList.AddRange(new[] {Convert.ToByte('\x81'), Convert.ToByte('\x49')});
                     sym = false;
                 }
-                else if (sym && testByte == '\x12')  // ?
+                else if (sym && testByte == '\x12') // ?
                 {
-                    byteList.AddRange(new[] { Convert.ToByte('\x81'), Convert.ToByte('\x48') });
+                    byteList.AddRange(new[] {Convert.ToByte('\x81'), Convert.ToByte('\x48')});
                     sym = false;
                 }
-                else if (sym && testByte == '\x13')  
+                else if (sym && testByte == '\x13')
                 {
                     // new character in dialog blob, break out
                     break;
@@ -115,7 +118,8 @@ namespace MseExtractAndInject.Core.Tools
                     skip = false;
                 }
                 else if (
-                    ((testByte >= 129 && testByte <= 131) || (testByte >= 136 && testByte <= 159) || (testByte >= 224 && testByte <= 234))
+                    ((testByte >= 129 && testByte <= 131) || (testByte >= 136 && testByte <= 159) ||
+                     (testByte >= 224 && testByte <= 234))
                     )
                 {
                     byteList.Add(testByte);
@@ -130,7 +134,7 @@ namespace MseExtractAndInject.Core.Tools
                 else
                 {
                     byteList.Add(Convert.ToByte('\x82'));
-                    var newcharByte = (byte)(testByte + 114);
+                    var newcharByte = (byte) (testByte + 114);
                     byteList.Add(newcharByte);
                 }
             }
@@ -168,8 +172,8 @@ namespace MseExtractAndInject.Core.Tools
                 case Characters.Doc:
                     dialog.Character = Characters.Doc;
                     break;
-                case Characters.Jack:
-                    dialog.Character = Characters.Jack;
+                case Characters.JackOrShela:
+                    dialog.Character = Characters.JackOrShela;
                     break;
                 default:
                     return null;

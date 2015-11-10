@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -17,8 +18,8 @@ namespace MesExtractAndInject
         {
             // TODO: Use console parser nuget to make this less shitty.
 #if DEBUG
-            var file = File.ReadAllBytes("OPEN_1.MES");
-            var pathName = "OPEN_1.MES";
+            var file = File.ReadAllBytes("000001.MES");
+            var pathName = "000001.MES";
 #else
             if (!ArgumentParser(args))
             {
@@ -31,16 +32,19 @@ namespace MesExtractAndInject
             //return;
 
             var japaneseEncoding = Encoding.GetEncoding(932);
-            var bytesForCole = japaneseEncoding.GetBytes("クーガー");
-            foreach (var position in file.Locate(bytesForCole))
+            var bytesForCole = japaneseEncoding.GetBytes("私殺");
+            var omgnew = new Byte[] {186, 37, 73};
+            foreach (var position in file.Locate(omgnew))
             {
-                var encodedName = japaneseEncoding.GetBytes(TextTools.FullWidthConvertor("Cougar"));
-                file = TextTools.ReplaceText(file, encodedName, position, position + bytesForCole.Length);
+                //var encodedName = japaneseEncoding.GetBytes(TextTools.FullWidthConvertor("Cougar"));
+                //file = TextTools.ReplaceText(file, encodedName, position, position + bytesForCole.Length);
                 Console.WriteLine(position);
             }
 
             var dialogs = TextTools.ParseDialogList(file);
             dialogs.RemoveAll(node => node == null);
+            var test = dialogs.Where(node => node.Character == Characters.JackOrSheila);
+            
             var newFile = file;
             var offset = 0;
             for (var i = 0; i < dialogs.Count; i++)
