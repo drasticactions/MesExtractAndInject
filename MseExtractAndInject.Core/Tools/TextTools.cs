@@ -141,38 +141,44 @@ namespace MseExtractAndInject.Core.Tools
             return rv;
         }
 
-        public static List<DialogBlob> ParseDialog(byte[] file)
+        public static DialogBlob GetNextDialogBlob(byte[] file, int offSet)
         {
-            var dialogList = new List<DialogBlob>();
+            var dialogIndexes = file.FindAllIndexOf(Convert.ToByte(186));
+            var dialogIndex = dialogIndexes.FirstOrDefault(node => offSet < node);
+            return ParseDialog(file, dialogIndex);
+        }
+
+        private static DialogBlob ParseDialog(byte[] file, int dialogIndex)
+        {
+            var dialog = new DialogBlob();
+            switch ((Characters)file[dialogIndex + 1])
+            {
+                case Characters.Cole:
+                    dialog.Character = Characters.Cole;
+                    break;
+                case Characters.Doc:
+                    dialog.Character = Characters.Doc;
+                    break;
+                case Characters.Jack:
+                    dialog.Character = Characters.Jack;
+                    break;
+                default:
+                    return null;
+            }
+            var endIndex = Array.IndexOf(file, Convert.ToByte('\x26'), dialogIndex);
+            var dialogBytes = file.Slice(dialogIndex, endIndex);
+            dialog.DialogBytes = dialogBytes;
+            dialog.StartIndex = dialogIndex + 2; // The start of the actual dialog.
+            dialog.EndIndex = endIndex;
+            dialog.Dialog = DecodeText(dialogBytes);
+            return dialog;
+        }
+
+        public static List<DialogBlob> ParseDialogList(byte[] file)
+        {
             // Get start of known dialog location
             var dialogIndexes = file.FindAllIndexOf(Convert.ToByte(186));
-            foreach (var dialogIndex in dialogIndexes)
-            {
-                // Find the character. If none, continue.
-                var dialog = new DialogBlob();
-                switch ((Characters)file[dialogIndex + 1])
-                {
-                    case Characters.Cole:
-                        dialog.Character = Characters.Cole;
-                        break;
-                    case Characters.Doc:
-                        dialog.Character = Characters.Doc;
-                        break;
-                    case Characters.Jack:
-                        dialog.Character = Characters.Jack;
-                        break;
-                    default:
-                        continue;
-                }
-                var endIndex = Array.IndexOf(file, Convert.ToByte('\x26'), dialogIndex);
-                var dialogBytes = file.Slice(dialogIndex, endIndex);
-                dialog.DialogBytes = dialogBytes;
-                dialog.StartIndex = dialogIndex + 2; // The start of the actual dialog.
-                dialog.EndIndex = endIndex;
-                dialog.Dialog = TextTools.DecodeText(dialogBytes);
-                dialogList.Add(dialog);
-            }
-            return dialogList;
+            return dialogIndexes.Select(dialogIndex => ParseDialog(file, dialogIndex)).ToList();
         }
 
         [DllImport("kernel32.dll", CharSet = CharSet.Unicode)]
