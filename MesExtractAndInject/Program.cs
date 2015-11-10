@@ -16,14 +16,20 @@ namespace MesExtractAndInject
         static void Main(string[] args)
         {
             // TODO: Use console parser nuget to make this less shitty.
+#if DEBUG
+            var file = File.ReadAllBytes("000001.MES");
+            var pathName = "000001.MES";
+#else
             if (!ArgumentParser(args))
             {
                 return;
             }
-
-            var japaneseEncoding = Encoding.GetEncoding(932);
             var file = File.ReadAllBytes(args[0]);
-            //var file = File.ReadAllBytes("OPEN_1.MES");
+            var pathName = args[0];
+#endif
+            //TranslatorFile(args);
+            //return;
+            var japaneseEncoding = Encoding.GetEncoding(932);
             var dialogs = TextTools.ParseDialogList(file);
             dialogs.RemoveAll(node => node == null);
             var newFile = file;
@@ -38,7 +44,7 @@ namespace MesExtractAndInject
                 newDialogs.RemoveAll(node => node == null);
                 Console.WriteLine("Character Name: " + Enum.GetName(typeof(Characters), dialogs[i].Character));
                 Console.WriteLine("Dialog: " + dialogs[i].Dialog + Environment.NewLine);
-                Console.WriteLine("Write New Dialog (leave empty to skip): ");
+                Console.Write("New Dialog: ");
                 var newDialog = Console.ReadLine();
                 Console.WriteLine(Environment.NewLine);
                 if (string.IsNullOrEmpty(newDialog)) continue;
@@ -47,11 +53,43 @@ namespace MesExtractAndInject
                 newFile = TextTools.ReplaceText(newFile, encodedText, newDialogs[i].StartIndex, newDialogs[i].EndIndex);
             }
 
-            var newFileName = Path.GetFileNameWithoutExtension(args[0]) + "_EDIT.MES";
+            var newFileName = Path.GetFileNameWithoutExtension(pathName) + "_EDIT.MES";
             //var newFileName = "OPEN_1_EDIT.MES";
             File.WriteAllBytes(newFileName, newFile);
             Console.WriteLine($"Done! Add edit {newFileName} to its original name and replace it on the FDI disk.");
             Console.ReadKey();
+        }
+
+        static void TranslatorFile(string[] args)
+        {
+            var japaneseEncoding = Encoding.GetEncoding(932);
+            var file = File.ReadAllBytes(args[0]);
+            //var file = File.ReadAllBytes("OPEN_1.MES");
+            var dialogs = TextTools.ParseDialogList(file);
+            dialogs.RemoveAll(node => node == null);
+            var newFile = file;
+            var offset = 0;
+            var newString = "";
+            for (var i = 0; i < dialogs.Count; i++)
+            {
+                if (dialogs[i] == null)
+                {
+                    continue;
+                }
+                var newDialogs = TextTools.ParseDialogList(newFile);
+                newDialogs.RemoveAll(node => node == null);
+                newString += "Character Name: " + Enum.GetName(typeof(Characters), dialogs[i].Character);
+                newString += Environment.NewLine;
+                newString += "Dialog: " + dialogs[i].Dialog;
+                newString += Environment.NewLine;
+                newString += "New Dialog: ";
+                newString += Environment.NewLine;
+                newString += Environment.NewLine;
+            }
+
+            var newFileName = Path.GetFileNameWithoutExtension(args[0]) + "_EDIT.TXT";
+            //var newFileName = "OPEN_1_EDIT.MES";
+            File.WriteAllText(newFileName, newString);
         }
 
         static bool ArgumentParser(string[] args)

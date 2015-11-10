@@ -45,6 +45,10 @@ namespace MseExtractAndInject.Core.Tools
                 {
                     control = true;
                 }
+                else if (control && testByte == '\x22')  // dialog start someone else?
+                {
+                    control = false;
+                }
                 else if (control && testByte == '\x23')  // dialog start cole
                 {
                     control = false;
