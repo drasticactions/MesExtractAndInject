@@ -17,8 +17,8 @@ namespace MesExtractAndInject
         {
             // TODO: Use console parser nuget to make this less shitty.
 #if DEBUG
-            var file = File.ReadAllBytes("000001.MES");
-            var pathName = "000001.MES";
+            var file = File.ReadAllBytes("OPEN_1.MES");
+            var pathName = "OPEN_1.MES";
 #else
             if (!ArgumentParser(args))
             {
@@ -29,7 +29,16 @@ namespace MesExtractAndInject
 #endif
             //TranslatorFile(args);
             //return;
+
             var japaneseEncoding = Encoding.GetEncoding(932);
+            var bytesForCole = japaneseEncoding.GetBytes("クーガー");
+            foreach (var position in file.Locate(bytesForCole))
+            {
+                var encodedName = japaneseEncoding.GetBytes(TextTools.FullWidthConvertor("Cougar"));
+                file = TextTools.ReplaceText(file, encodedName, position, position + bytesForCole.Length);
+                Console.WriteLine(position);
+            }
+
             var dialogs = TextTools.ParseDialogList(file);
             dialogs.RemoveAll(node => node == null);
             var newFile = file;
@@ -41,12 +50,14 @@ namespace MesExtractAndInject
                     continue;
                 }
                 var newDialogs = TextTools.ParseDialogList(newFile);
+
                 newDialogs.RemoveAll(node => node == null);
                 Console.WriteLine("Character Name: " + Enum.GetName(typeof(Characters), dialogs[i].Character));
                 Console.WriteLine("Dialog: " + dialogs[i].Dialog + Environment.NewLine);
                 Console.Write("New Dialog: ");
                 var newDialog = Console.ReadLine();
                 Console.WriteLine(Environment.NewLine);
+
                 if (string.IsNullOrEmpty(newDialog)) continue;
                 var encodedText = japaneseEncoding.GetBytes(TextTools.FullWidthConvertor(newDialog));
                 encodedText = TextTools.Combine(encodedText, new[] { Convert.ToByte('\xBA') });
@@ -59,7 +70,6 @@ namespace MesExtractAndInject
             Console.WriteLine($"Done! Add edit {newFileName} to its original name and replace it on the FDI disk.");
             Console.ReadKey();
         }
-
         static void TranslatorFile(string[] args)
         {
             var japaneseEncoding = Encoding.GetEncoding(932);

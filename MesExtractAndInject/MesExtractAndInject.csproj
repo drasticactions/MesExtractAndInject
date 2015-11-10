@@ -128,7 +128,9 @@
     <None Include="MES\48PLUS.MES" />
     <None Include="MES\56PLUS.MES" />
     <None Include="MES\63PLUS.MES" />
-    <None Include="MES\OOOOOO.MES" />
+    <None Include="OOOOOO.MES">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="MES\OPEN_1.MES" />
     <None Include="MES\OPEN_2.MES" />
     <None Include="MES\TOWNS.MES" />
