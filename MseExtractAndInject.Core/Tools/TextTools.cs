@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -100,10 +101,13 @@ namespace MseExtractAndInject.Core.Tools
                     byteList.AddRange(new[] { Convert.ToByte('\x81'), Convert.ToByte('\x48') });
                     sym = false;
                 }
-                else if (sym && testByte == '\x13')  // newline for two characted dialog in one box
+                else if (sym && testByte == '\x13')  
                 {
-                    byteList.Add(Convert.ToByte('\n'));
-                    sym = false;
+                    // new character in dialog blob, break out
+                    break;
+
+                    //byteList.Add(Convert.ToByte('\n'));
+                    //sym = false;
                 }
                 else if (skip)
                 {
@@ -119,6 +123,7 @@ namespace MseExtractAndInject.Core.Tools
                 }
                 else if (sym || control)
                 {
+                    Debug.WriteLine(japaneseEncoding.GetChars(new[] {testByte}));
                     sym = false;
                     control = false;
                 }
@@ -181,7 +186,7 @@ namespace MseExtractAndInject.Core.Tools
         public static List<DialogBlob> ParseDialogList(byte[] file)
         {
             // Get start of known dialog location
-            var dialogIndexes = file.FindAllIndexOf(Convert.ToByte(186));
+            var dialogIndexes = file.FindAllIndexOf(Convert.ToByte('\xBA'));
             return dialogIndexes.Select(dialogIndex => ParseDialog(file, dialogIndex)).ToList();
         }
 
