@@ -18,8 +18,8 @@ namespace MesExtractAndInject
         {
             // TODO: Use console parser nuget to make this less shitty.
 #if DEBUG
-            var file = File.ReadAllBytes("000001.MES");
-            var pathName = "000001.MES";
+            var file = File.ReadAllBytes("OPEN_1.MES");
+            var pathName = "OPEN_1.MES";
 #else
             if (!ArgumentParser(args))
             {
@@ -32,8 +32,8 @@ namespace MesExtractAndInject
             //return;
 
             var japaneseEncoding = Encoding.GetEncoding(932);
-            var bytesForCole = japaneseEncoding.GetBytes("私殺");
-            var omgnew = new Byte[] {186, 37, 73};
+            var bytesForCole = japaneseEncoding.GetBytes("真剣");
+            var omgnew = new Byte[] {186, 37};
             foreach (var position in file.Locate(omgnew))
             {
                 //var encodedName = japaneseEncoding.GetBytes(TextTools.FullWidthConvertor("Cougar"));
@@ -63,8 +63,9 @@ namespace MesExtractAndInject
                 Console.WriteLine(Environment.NewLine);
 
                 if (string.IsNullOrEmpty(newDialog)) continue;
+
                 var encodedText = japaneseEncoding.GetBytes(TextTools.FullWidthConvertor(newDialog));
-                encodedText = TextTools.Combine(encodedText, new[] { Convert.ToByte('\xBA') });
+                encodedText = TextTools.Combine( encodedText, new[] { Convert.ToByte('\xBA'), Convert.ToByte('\x26'), Convert.ToByte('\xBA'), Convert.ToByte('\x25')}, encodedText, new [] { Convert.ToByte('\xBA') });
                 newFile = TextTools.ReplaceText(newFile, encodedText, newDialogs[i].StartIndex, newDialogs[i].EndIndex);
             }
 
@@ -77,8 +78,9 @@ namespace MesExtractAndInject
         static void TranslatorFile(string[] args)
         {
             var japaneseEncoding = Encoding.GetEncoding(932);
-            var file = File.ReadAllBytes(args[0]);
-            //var file = File.ReadAllBytes("OPEN_1.MES");
+            //var file = File.ReadAllBytes(args[0]);
+            var path = "TOWNS";
+            var file = File.ReadAllBytes("MES/" + path + ".MES");
             var dialogs = TextTools.ParseDialogList(file);
             dialogs.RemoveAll(node => node == null);
             var newFile = file;
@@ -101,8 +103,8 @@ namespace MesExtractAndInject
                 newString += Environment.NewLine;
             }
 
-            var newFileName = Path.GetFileNameWithoutExtension(args[0]) + "_EDIT.TXT";
-            //var newFileName = "OPEN_1_EDIT.MES";
+            //var newFileName = Path.GetFileNameWithoutExtension(args[0]) + "_EDIT.TXT";
+            var newFileName = path + "-EDIT.TXT";
             File.WriteAllText(newFileName, newString);
         }
 

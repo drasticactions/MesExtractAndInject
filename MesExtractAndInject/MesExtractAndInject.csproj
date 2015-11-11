@@ -51,89 +51,249 @@
     <None Include="000001.MES">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="MES\000002.MES" />
-    <None Include="MES\000003.MES" />
-    <None Include="MES\000004.MES" />
-    <None Include="MES\000005.MES" />
-    <None Include="MES\000006.MES" />
-    <None Include="MES\000007.MES" />
-    <None Include="MES\000008.MES" />
-    <None Include="MES\000009.MES" />
-    <None Include="MES\000010.MES" />
-    <None Include="MES\000011.MES" />
-    <None Include="MES\000012.MES" />
-    <None Include="MES\000013.MES" />
-    <None Include="MES\000014.MES" />
-    <None Include="MES\000015.MES" />
-    <None Include="MES\000016.MES" />
-    <None Include="MES\000017.MES" />
-    <None Include="MES\000018.MES" />
-    <None Include="MES\000019.MES" />
-    <None Include="MES\000020.MES" />
-    <None Include="MES\000021.MES" />
-    <None Include="MES\000022.MES" />
-    <None Include="MES\000023.MES" />
-    <None Include="MES\000024.MES" />
-    <None Include="MES\000025.MES" />
-    <None Include="MES\000026.MES" />
-    <None Include="MES\000027.MES" />
-    <None Include="MES\000028.MES" />
-    <None Include="MES\000029.MES" />
-    <None Include="MES\000030.MES" />
-    <None Include="MES\000031.MES" />
-    <None Include="MES\000032.MES" />
-    <None Include="MES\000033.MES" />
-    <None Include="MES\000034.MES" />
-    <None Include="MES\000035.MES" />
-    <None Include="MES\000036.MES" />
-    <None Include="MES\000037.MES" />
-    <None Include="MES\000038.MES" />
-    <None Include="MES\000039.MES" />
-    <None Include="MES\000040.MES" />
-    <None Include="MES\000041.MES" />
-    <None Include="MES\000042.MES" />
-    <None Include="MES\000043.MES" />
-    <None Include="MES\000044.MES" />
-    <None Include="MES\000045.MES" />
-    <None Include="MES\000046.MES" />
-    <None Include="MES\000047.MES" />
-    <None Include="MES\000048.MES" />
-    <None Include="MES\000049.MES" />
-    <None Include="MES\000050.MES" />
-    <None Include="MES\000051.MES" />
-    <None Include="MES\000052.MES" />
-    <None Include="MES\000053.MES" />
-    <None Include="MES\000054.MES" />
-    <None Include="MES\000055.MES" />
-    <None Include="MES\000056.MES" />
-    <None Include="MES\000057.MES" />
-    <None Include="MES\000058.MES" />
-    <None Include="MES\000059.MES" />
-    <None Include="MES\000060.MES" />
-    <None Include="MES\000061.MES" />
-    <None Include="MES\000062.MES" />
-    <None Include="MES\000063.MES" />
-    <None Include="MES\000064.MES" />
-    <None Include="MES\000065.MES" />
-    <None Include="MES\000066.MES" />
-    <None Include="MES\000067.MES" />
-    <None Include="MES\10PLUS.MES" />
-    <None Include="MES\11PLUS.MES" />
-    <None Include="MES\13PLUS.MES" />
-    <None Include="MES\17PLUS.MES" />
-    <None Include="MES\20PLUS.MES" />
-    <None Include="MES\22PLUS.MES" />
-    <None Include="MES\24PLUS.MES" />
-    <None Include="MES\26PLUS.MES" />
-    <None Include="MES\48PLUS.MES" />
-    <None Include="MES\56PLUS.MES" />
-    <None Include="MES\63PLUS.MES" />
+    <None Include="MES\000002.MES">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="MES\000003.MES">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="MES\000004.MES">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="MES\000005.MES">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="MES\000006.MES">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="MES\000007.MES">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="MES\000008.MES">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="MES\000009.MES">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="MES\000010.MES">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="MES\000011.MES">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="MES\000012.MES">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="MES\000013.MES">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="MES\000014.MES">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="MES\000015.MES">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="MES\000016.MES">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="MES\000017.MES">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="MES\000018.MES">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="MES\000019.MES">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="MES\000020.MES">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="MES\000021.MES">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="MES\000022.MES">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="MES\000023.MES">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="MES\000024.MES">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="MES\000025.MES">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="MES\000026.MES">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="MES\000027.MES">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="MES\000028.MES">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="MES\000029.MES">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="MES\000030.MES">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="MES\000031.MES">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="MES\000032.MES">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="MES\000033.MES">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="MES\000034.MES">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="MES\000035.MES">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="MES\000036.MES">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="MES\000037.MES">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="MES\000038.MES">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="MES\000039.MES">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="MES\000040.MES">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="MES\000041.MES">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="MES\000042.MES">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="MES\000043.MES">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="MES\000044.MES">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="MES\000045.MES">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="MES\000046.MES">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="MES\000047.MES">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="MES\000048.MES">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="MES\000049.MES">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="MES\000050.MES">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="MES\000051.MES">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="MES\000052.MES">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="MES\000053.MES">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="MES\000054.MES">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="MES\000055.MES">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="MES\000056.MES">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="MES\000057.MES">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="MES\000058.MES">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="MES\000059.MES">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="MES\000060.MES">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="MES\000061.MES">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="MES\000062.MES">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="MES\000063.MES">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="MES\000064.MES">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="MES\000065.MES">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="MES\000066.MES">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="MES\000067.MES">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="MES\10PLUS.MES">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="MES\11PLUS.MES">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="MES\13PLUS.MES">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="MES\17PLUS.MES">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="MES\20PLUS.MES">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="MES\22PLUS.MES">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="MES\24PLUS.MES">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="MES\26PLUS.MES">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="MES\48PLUS.MES">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="MES\56PLUS.MES">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="MES\63PLUS.MES">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="OOOOOO.MES">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Include="MES\OPEN_1.MES" />
-    <None Include="MES\OPEN_2.MES" />
-    <None Include="MES\TOWNS.MES" />
+    <None Include="MES\OPEN_1.MES">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="MES\OPEN_2.MES">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="MES\TOWNS.MES">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="OPENNING.MES">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
