@@ -172,8 +172,8 @@ namespace MseExtractAndInject.Core.Tools
                 case Characters.Doc:
                     dialog.Character = Characters.Doc;
                     break;
-                case Characters.JackOrShela:
-                    dialog.Character = Characters.JackOrShela;
+                case Characters.JackOrSheila:
+                    dialog.Character = Characters.JackOrSheila;
                     break;
                 default:
                     return null;
