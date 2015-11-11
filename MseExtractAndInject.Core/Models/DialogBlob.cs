@@ -18,5 +18,7 @@ namespace MseExtractAndInject.Core.Models
         public int StartIndex { get; set; }
 
         public int EndIndex { get; set; }
+
+        public bool IsNewDialog { get; set; }
     }
 }

@@ -14,7 +14,14 @@ namespace MseExtractAndInject.Core.Tools
         public static byte[] ReplaceText(byte[] file, byte[] replaceText, int startIndex, int endIndex)
         {
             var startByte = file.Slice(0, startIndex);
-            var endByte = file.Slice(endIndex, file.Length - 1);
+            var endByte = file.Slice(endIndex, file.Length);
+            return Combine(startByte, replaceText, endByte);
+        }
+
+        public static byte[] AddText(byte[] file, byte[] replaceText, int startIndex)
+        {
+            var startByte = file.Slice(0, startIndex);
+            var endByte = file.Slice(startIndex + 1, file.Length);
             return Combine(startByte, replaceText, endByte);
         }
 

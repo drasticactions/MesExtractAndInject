@@ -46,7 +46,7 @@ namespace MesExtractAndInject
             var test = dialogs.Where(node => node.Character == Characters.JackOrSheila);
             
             var newFile = file;
-            var offset = 0;
+            var additionalDialogs = 0;
             for (var i = 0; i < dialogs.Count; i++)
             {
                 if (dialogs[i] == null)
@@ -54,8 +54,57 @@ namespace MesExtractAndInject
                     continue;
                 }
                 var newDialogs = TextTools.ParseDialogList(newFile);
-
                 newDialogs.RemoveAll(node => node == null);
+
+                // Don't allow changing the initial line.
+                if (i != 0)
+                {
+                    var insertDialog = true;
+                    while (insertDialog)
+                    {
+                        Console.WriteLine("Insert New Line?");
+                        var response = Console.ReadKey();
+                        Console.Write(Environment.NewLine);
+                        if (response.Key == ConsoleKey.Y)
+                        {
+                            var dialog = new DialogBlob();
+                            Console.WriteLine("Character? 1. Cole 2. Doc 3. Other");
+                            response = Console.ReadKey();
+                            Console.Write(Environment.NewLine);
+                            switch (response.Key)
+                            {
+                                case ConsoleKey.NumPad1:
+                                    dialog.Character = Characters.Cole;
+                                    break;
+                                case ConsoleKey.NumPad2:
+                                    dialog.Character = Characters.Doc;
+                                    break;
+                                case ConsoleKey.NumPad3:
+                                    dialog.Character = Characters.JackOrSheila;
+                                    break;
+                                default:
+                                    dialog.Character = Characters.Cole;
+                                    break;
+                            }
+                            Console.Write("New Dialog: ");
+                            var brandNewDialog = Console.ReadLine();
+                            var newEncodedText = japaneseEncoding.GetBytes(TextTools.FullWidthConvertor(brandNewDialog));
+                            newEncodedText = TextTools.Combine(new[] { Convert.ToByte('\x26'), Convert.ToByte('\xBA'), Convert.ToByte(dialog.Character) }, newEncodedText, new[] { Convert.ToByte('\xBA'), Convert.ToByte('\x26')});
+                            var lastDialog = newDialogs[i + additionalDialogs - 1];
+                            dialog.StartIndex = lastDialog.EndIndex;
+                            dialog.EndIndex = dialog.StartIndex + newEncodedText.Length;
+                            newFile = TextTools.AddText(newFile, newEncodedText, dialog.StartIndex);
+                            newDialogs = TextTools.ParseDialogList(newFile);
+                            newDialogs.RemoveAll(node => node == null);
+                            additionalDialogs++;
+                        }
+                        else
+                        {
+                            insertDialog = false;
+                        }
+                    }
+                }
+
                 Console.WriteLine("Character Name: " + Enum.GetName(typeof(Characters), dialogs[i].Character));
                 Console.WriteLine("Dialog: " + dialogs[i].Dialog + Environment.NewLine);
                 Console.Write("New Dialog: ");
@@ -65,8 +114,9 @@ namespace MesExtractAndInject
                 if (string.IsNullOrEmpty(newDialog)) continue;
 
                 var encodedText = japaneseEncoding.GetBytes(TextTools.FullWidthConvertor(newDialog));
-                encodedText = TextTools.Combine( encodedText, new[] { Convert.ToByte('\xBA'), Convert.ToByte('\x26'), Convert.ToByte('\xBA'), Convert.ToByte('\x25')}, encodedText, new [] { Convert.ToByte('\xBA') });
-                newFile = TextTools.ReplaceText(newFile, encodedText, newDialogs[i].StartIndex, newDialogs[i].EndIndex);
+                encodedText = TextTools.Combine(encodedText, new[] { Convert.ToByte('\xBA') });
+                //encodedText = TextTools.Combine( encodedText, new[] { Convert.ToByte('\xBA'), Convert.ToByte('\x26'), Convert.ToByte('\xBA'), Convert.ToByte('\x25')}, encodedText, new [] { Convert.ToByte('\xBA') });
+                newFile = TextTools.ReplaceText(newFile, encodedText, newDialogs[i + additionalDialogs].StartIndex, newDialogs[i + additionalDialogs].EndIndex);
             }
 
             var newFileName = Path.GetFileNameWithoutExtension(pathName) + "_EDIT.MES";
@@ -75,6 +125,7 @@ namespace MesExtractAndInject
             Console.WriteLine($"Done! Add edit {newFileName} to its original name and replace it on the FDI disk.");
             Console.ReadKey();
         }
+
         static void TranslatorFile(string[] args)
         {
             var japaneseEncoding = Encoding.GetEncoding(932);
