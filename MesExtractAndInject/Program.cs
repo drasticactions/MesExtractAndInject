@@ -130,7 +130,7 @@ namespace MesExtractAndInject
         {
             var japaneseEncoding = Encoding.GetEncoding(932);
             //var file = File.ReadAllBytes(args[0]);
-            var path = "TOWNS";
+            var path = "OPEN_2";
             var file = File.ReadAllBytes("MES/" + path + ".MES");
             var dialogs = TextTools.ParseDialogList(file);
             dialogs.RemoveAll(node => node == null);
