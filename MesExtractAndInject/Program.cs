@@ -88,8 +88,8 @@ namespace MesExtractAndInject
                             }
                             Console.Write("New Dialog: ");
                             var brandNewDialog = Console.ReadLine();
-                            var newEncodedText = japaneseEncoding.GetBytes(TextTools.FullWidthConvertor(brandNewDialog));
-                            newEncodedText = TextTools.Combine(new[] { Convert.ToByte('\x26'), Convert.ToByte('\xBA'), Convert.ToByte(dialog.Character) }, newEncodedText, new[] { Convert.ToByte('\xBA'), Convert.ToByte('\x26')});
+                            var newEncodedText = japaneseEncoding.GetBytes(TextTools.HalfWidthConvertor(brandNewDialog));
+                            newEncodedText = TextTools.Combine(new[] { Convert.ToByte('\x26'), Convert.ToByte('\xBA'), Convert.ToByte(dialog.Character), Convert.ToByte('\x21') }, newEncodedText, new[] { Convert.ToByte('\x00'), Convert.ToByte('\xBA'), Convert.ToByte('\x26')});
                             var lastDialog = newDialogs[i + additionalDialogs - 1];
                             dialog.StartIndex = lastDialog.EndIndex;
                             dialog.EndIndex = dialog.StartIndex + newEncodedText.Length;
@@ -113,8 +113,8 @@ namespace MesExtractAndInject
 
                 if (string.IsNullOrEmpty(newDialog)) continue;
 
-                var encodedText = japaneseEncoding.GetBytes(TextTools.FullWidthConvertor(newDialog));
-                encodedText = TextTools.Combine(encodedText, new[] { Convert.ToByte('\xBA') });
+                var encodedText = japaneseEncoding.GetBytes(TextTools.HalfWidthConvertor(newDialog));
+                encodedText = TextTools.Combine(new[] { Convert.ToByte('\x21')} , encodedText, new[] { Convert.ToByte('\x00'), Convert.ToByte('\xBA') });
                 //encodedText = TextTools.Combine( encodedText, new[] { Convert.ToByte('\xBA'), Convert.ToByte('\x26'), Convert.ToByte('\xBA'), Convert.ToByte('\x25')}, encodedText, new [] { Convert.ToByte('\xBA') });
                 newFile = TextTools.ReplaceText(newFile, encodedText, newDialogs[i + additionalDialogs].StartIndex, newDialogs[i + additionalDialogs].EndIndex);
             }
